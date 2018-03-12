@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    Repeater _hor = new Repeater("Horizontal");
-    Repeater _ver = new Repeater("Vertical");
+    Repeater _hor = new Repeater("Mouse X");
+    Repeater _ver = new Repeater("Mouse Y");
     string[] _buttons = new string[] { "Fire1", "Fire2", "Fire3" };
 
     public static event EventHandler<InfoEventArgs<Point>> moveEvent;
@@ -43,8 +43,8 @@ public class InputController : MonoBehaviour
 
 class Repeater
 {
-    const float threshold = 0.5f;
-    const float rate = 0.25f;
+    const float threshold = 0.1f;
+    const float rate = 0.1f;
     float _next;
     bool _hold;
     string _axis;
@@ -57,8 +57,8 @@ class Repeater
     public int Update()
     {
         int returnValue = 0;
-        int value = Mathf.RoundToInt(Input.GetAxisRaw(_axis));
-        if (value != 0)
+        int value = Mathf.RoundToInt(Input.GetAxis(_axis)); //wartość współrzędnej która będzie przesuwana
+        if (value != 0) //
         {
             if (Time.time > _next)
             {
